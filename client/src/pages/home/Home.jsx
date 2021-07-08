@@ -6,14 +6,14 @@ import Feed from "../../component/feed/feed";
 import Rightbar from "../../component/rightbar/rightbar";
 function Home() {
     return (
-        <div>
+        <>
             <Topbar />
             <div className="HomeContainer">
                 <Sidebar />
                 <Feed/>
                 <Rightbar/>
             </div>
-        </div>
+        </>
     )
 }
 

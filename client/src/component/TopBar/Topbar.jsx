@@ -6,7 +6,7 @@ function Topbar() {
     return (
         <div className="topbarContainer">
             <div className="topbarLeft">
-                <span className="logo">Social Media</span>
+                <span className="logo">Remember Me</span>
             </div>
             <div className="topbarCenter">
                 <div className="searchbar">
