@@ -22,7 +22,7 @@
         min:6
     },
 
-    profile:{
+    profilePicture:{
         type:String,
         default:""
     },
@@ -49,17 +49,20 @@
 
     desc:{
         type:String,
-        max:50
+        max:50,
+        default:""
     },
 
     city:{
         type:String,
-        max:50
+        max:50,
+        default:""
     },
 
     from:{
         type:String,
-        max:50
+        max:50,
+        default:""
     },
 
     relationship:{
@@ -69,7 +72,7 @@
  },
 
 
-{timeStamps:true}
+{timestamps:true}
 
  );
 
