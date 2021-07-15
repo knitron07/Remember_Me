@@ -10,7 +10,7 @@ const postsRoute = require ("./routes/posts");
 dotenv.config();
 
 //Connecting Database
-mongoose.connect("mongodb+srv://samar:samarSDSM@cluster0.vrkio.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true},(error)=>{
+mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true},(error)=>{
     if(!error){
         console.log("connected to MONGO");
     }else{
