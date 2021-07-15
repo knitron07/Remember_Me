@@ -9,7 +9,7 @@ const AuthRecducer=(state,action)=>{
             };
         case "LOGIN_SUCCESS":
             return {
-                user:action.user,
+                user:action.payload,
                 isFetching:false,
                 error:false
             };

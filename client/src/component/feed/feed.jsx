@@ -1,22 +1,23 @@
 // eslint-disable-next-line react-hooks/rules-of-hooks
 import "./feed.css"
-import {useState,useEffect} from "react";
+import {useState,useEffect, useContext} from "react";
 import Share from "../share/share.jsx";
 import Post from "../Post/post";
 import axios from "axios";
+import { AuthContext } from "../../Context/AuthContext";
 
 function Feed({username}) {
     
     const [posts,setPosts]=useState([]);
-
+    const {user} =useContext(AuthContext)
     useEffect(()=>{
         const fetchPosts=async ()=>{
-            const response= username? await axios.get("/posts/profile/"+username):await axios.get("posts/timeline/60ec2f33cda1592db087efc4");
+            const response= username? await axios.get("/posts/profile/"+username):await axios.get("posts/timeline/"+user._id);
             setPosts(response.data);
         }
 
         fetchPosts();
-    },[username]);
+    },[username,user._id]);
     return (
         <div className="feed">
            <div className="feedWrapper">
