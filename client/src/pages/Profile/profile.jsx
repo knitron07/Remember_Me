@@ -16,13 +16,10 @@ function Profile() {
     useEffect(() => {
         const fetchUser=async()=>{
             const fetchedUser= await axios.get(`/users?username=${username}`);
-            console.log(fetchedUser.data);
             setUser(fetchedUser.data);
         }
 
-      
         
-
     fetchUser();
     }, [username])
     return (
@@ -43,7 +40,7 @@ function Profile() {
             </div>
             <div className="profileRightBottom">
                 <Feed username={username}/>
-                <Rightbar user/>
+                <Rightbar user={user}/>
             </div>
             </div>
         </div>

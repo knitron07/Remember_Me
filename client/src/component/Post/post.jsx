@@ -1,22 +1,33 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import "./post.css";
-import React ,{ useState,useEffect } from "react";
+import React ,{ useState,useEffect, useContext } from "react";
 import {MoreVert} from "@material-ui/icons";
 import axios from "axios";
 import {format} from "timeago.js";
 import {Link} from "react-router-dom";
-
+import {AuthContext} from "../../Context/AuthContext";
 
 function post(props) {
     
      const [like, setLike] = useState(props.postData.likes.length);
      const [islike, setisLike] = useState(false);
      const [user, setUser] = useState({});
-     const likehandler=()=>{
-         setLike(islike? like+1:like-1);
+     const {user:currentUser} = useContext(AuthContext)
+     const likehandler= async ()=>{
+         try {
+             await axios.put("/posts/"+props.postData._id+"/like",{userId:currentUser._id})
+         } catch (error) {
+             console.log(error)
+         }
+         setLike(islike? like-1:like+1);
          setisLike(!islike);
      }
     
+
+    useEffect(() => {
+        setisLike(props.postData.likes.includes(currentUser._id));
+        
+    },[])
 
     useEffect(()=>{
         const fetchUser=async ()=>{
@@ -45,7 +56,7 @@ function post(props) {
                 </div>
                 <div className="postCenter">
                     <span className="postText"> {props?.postData.desc}</span>
-                    <img className="postImg" src={PF+props.postData.img} alt="" />
+                    <img className="postImg" src={props?.postData.img} alt="" />
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">

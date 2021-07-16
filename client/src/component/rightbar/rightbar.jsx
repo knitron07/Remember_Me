@@ -1,13 +1,47 @@
 import "./rightbar.css";
 import {Users} from "../../dummyData";
 import Online from "../online/online";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import {Link} from "react-router-dom";
+import { Add, Remove } from "@material-ui/icons";
+import { AuthContext } from "../../Context/AuthContext";
 
 
-
-function rightbar({user}) {
+function Rightbar({user}) {
     const PF=process.env.REACT_APP_PUBLIC_FOLDER;
-
+    const [friends,setFriends]=useState([]);
     
+    const {user:currentUser,dispatch}=useContext(AuthContext);
+    const [isFollowed,setisFollowed]=useState(currentUser.followings.includes(user?._id));
+    
+
+    useEffect(() => {
+        const getFriends= async ()=>{
+            const res = await axios.get("/users/friends/"+user._id);
+            setFriends(res.data);
+        }
+        
+         getFriends();
+    },[user])
+    
+    const handleClick=async()=>{
+        try {
+            if(isFollowed){
+                await axios.put("/users/"+user._id+"/unfollow",{userId:currentUser._id});
+                dispatch({type:"UNFOLLOW",payload:user._id});
+            }else{
+                await axios.put("/users/"+user._id+"/follow",{userId:currentUser._id});
+                dispatch({type:"UNFOLLOW",payload:user._id});
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
+        setisFollowed(!isFollowed);
+    }
+
+
     const HomeRightbar=()=>{
         return(
         <>
@@ -25,9 +59,15 @@ function rightbar({user}) {
         </>
         );
     }
-    const ProfileRightbar=()=>{
-        return(
+    const ProfileRightbar= ()=>{
+        return  (
         <>
+            {   user.username !== currentUser.username && (
+                <button className="rightbarFollowButton" onClick={handleClick}>
+                  {isFollowed ? "Unfollow" : "Follow"}
+                  {isFollowed ? <Remove /> : <Add />}
+                </button>
+            )}
             <h4 className="rightbarprofileTitle"> User Information</h4>
             <div className="rightbarInfo">
                 <div className="rightbarInfoItem">
@@ -46,26 +86,18 @@ function rightbar({user}) {
 
             <h4 className="rightbarprofileTitle"> User friends</h4>
             <div className="rightbarFollowings">
-                <div className="rightbarFollowing">
-                    <img src={`${PF}person/2.jpeg`} alt="" className="rightbarFollowingImg"/>
-                    <span className="rightbarFollowingName">samar</span>
-                </div>
-                <div className="rightbarFollowing">
-                    <img src={`${PF}person/3.jpeg`} alt="" className="rightbarFollowingImg"/>
-                    <span className="rightbarFollowingName">samar</span>
-                </div>
-                <div className="rightbarFollowing">
-                    <img src={`${PF}person/4.jpeg`} alt="" className="rightbarFollowingImg"/>
-                    <span className="rightbarFollowingName">samar</span>
-                </div>
-                <div className="rightbarFollowing">
-                    <img src={`${PF}person/5.jpeg`} alt="" className="rightbarFollowingImg"/>
-                    <span className="rightbarFollowingName">samar</span>
-                </div>
-                <div className="rightbarFollowing">
-                    <img src={`${PF}person/6.jpeg`} alt="" className="rightbarFollowingImg"/>
-                    <span className="rightbarFollowingName">samar</span>
-                </div>
+                {friends.map((friend)=>{
+
+                    return (
+                        <Link to={'/profile/'+friend.username} style={{textDecoration:"none",color:"black"}}>
+                            <div className="rightbarFollowing">
+                                <img src={friend.profilePicture ? PF+friend.profilePicture:`https://ui-avatars.com/api/?name=${friend.username}`}  className="rightbarFollowingImg"/>
+                                <span className="rightbarFollowingName">{friend.username}</span>
+                            </div>
+                        </Link>
+                            );
+                })}
+                
             </div>
         </>
         );
@@ -80,4 +112,4 @@ function rightbar({user}) {
     )
 }
 
-export default rightbar
+export default Rightbar

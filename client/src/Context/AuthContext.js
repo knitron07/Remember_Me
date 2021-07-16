@@ -8,7 +8,7 @@ const INITIAL_STATE={
         profile:"",
         coverPicture:"",
         followers:[],
-        followings:["60ec31da7d281b3f700ca2d6"],
+        followings:[],
         isAdmin:false,
         username:"amar",
         email:"amar@gmail.com",
