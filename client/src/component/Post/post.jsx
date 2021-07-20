@@ -27,7 +27,7 @@ function post(props) {
     useEffect(() => {
         setisLike(props.postData.likes.includes(currentUser._id));
         
-    },[])
+    },[currentUser._id])
 
     useEffect(()=>{
         const fetchUser=async ()=>{

@@ -22,7 +22,7 @@ function Rightbar({user}) {
             setFriends(res.data);
         }
         
-         getFriends();
+         user && getFriends();
     },[user])
     
     const handleClick=async()=>{
