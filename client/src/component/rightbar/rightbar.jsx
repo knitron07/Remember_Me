@@ -13,7 +13,7 @@ function Rightbar({user}) {
     const [friends,setFriends]=useState([]);
     
     const {user:currentUser,dispatch}=useContext(AuthContext);
-    const [isFollowed,setisFollowed]=useState(currentUser.followings.includes(user?._id));
+    const [isFollowed,setisFollowed]=useState(currentUser?.followings.includes(user?._id));
     
 
     useEffect(() => {
@@ -62,7 +62,7 @@ function Rightbar({user}) {
     const ProfileRightbar= ()=>{
         return  (
         <>
-            {   user.username !== currentUser.username && (
+            {   user.username !== currentUser?.username && (
                 <button className="rightbarFollowButton" onClick={handleClick}>
                   {isFollowed ? "Unfollow" : "Follow"}
                   {isFollowed ? <Remove /> : <Add />}

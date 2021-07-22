@@ -19,12 +19,12 @@ function Feed({username}) {
         }
 
         fetchPosts();
-    },[username,user._id]);
+    },[username,user]);
     
     return (
         <div className="feed">
            <div className="feedWrapper">
-               {(!username || (username === user.username)) && <Share />} 
+               {user && (!username || (username === user.username)) && <Share />} 
                 {posts.map((singlePost)=>{
                    return (<Post key={singlePost._id} postData={singlePost}/>);
                 })}

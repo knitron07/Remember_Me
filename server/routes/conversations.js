@@ -15,7 +15,7 @@ router.post("/",async(req,res)=>{
      res.status(200).json(error);
  }
 });
-
+//get user conservation
 router.get("/:userId",async(req,res)=>{
     try {
         const Conversation= await Conversations.find({
@@ -27,5 +27,18 @@ router.get("/:userId",async(req,res)=>{
         res.status(200).json(error);
     }
    });
-//get user conservation   
+ 
+
+// get conv includes two userId
+
+router.get("/find/:firstUserId/:secondUserId", async (req, res) => {
+    try {
+      const conversation = await Conversation.findOne({
+        members: { $all: [req.params.firstUserId, req.params.secondUserId] },
+      });
+      res.status(200).json(conversation)
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
 module.exports=router;

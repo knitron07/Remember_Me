@@ -26,10 +26,13 @@ function Topbar() {
                 <span className="topbarLink">Timeline</span>
                 </div>
                 <div className="topbarIcons">
+                    <Link to="/messenger">
                     <div className="topbarIconItem">
+
                        <Chat />
                        <span className="topbarIconBadge">1</span>
                     </div>
+                    </Link>
                     <div className="topbarIconItem">
                        <Person />
                        <span className="topbarIconBadge">1</span>
@@ -38,9 +41,9 @@ function Topbar() {
                        <span className="topbarIconBadge">1</span>
                     </div>
                 </div>
-                <Link to={`/profile/${user.username}`}>
+                {user && <Link to={`/profile/${user.username}`}>
                     <img src={ user.profilePicture ? PF+user.profilePicture : `https://ui-avatars.com/api/?name=${user.username}`} alt="" className="topbarImg" />
-                </Link>
+                </Link>}
                 
             </div>
 
