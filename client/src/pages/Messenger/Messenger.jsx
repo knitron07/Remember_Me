@@ -36,16 +36,16 @@ function Messenger() {
     }, []);
 
     useEffect(() => {
-        arrivalMessages&& currentChat?.members.includes(arrivalMessages.sender) && setMessages( prev =>[...prev,arrivalMessages]) ;
+        arrivalMessages && currentChat?.members.includes(arrivalMessages.sender) && setMessages( prev =>[...prev,arrivalMessages]) ;
         
-    }, [arrivalMessages,currentChat])
+    }, [arrivalMessages,currentChat]);
 
     useEffect(() => {
-
+ 
         socket.current.emit("addUser",user._id);
 
         socket.current.on("getUsers",(users)=>{
-            console.log(users)
+            console.log(users);
          setOnlineUsers(user.followings.filter((f) => users.some((u)=> u.userId === f)));
         });
 
