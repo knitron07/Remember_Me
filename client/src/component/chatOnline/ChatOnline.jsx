@@ -21,7 +21,7 @@ function ChatOnline({onlineUsers,currentId,setCurrentChat}) {
 
     }, [friends,onlineUsers]);
     
-    const handleClick=async (user)=>{
+    const handleClick= async (user)=>{
         try {
             const res = await axios.get(`/conversations/find/${currentId}/${user._id}`);
             setCurrentChat(res.data);
@@ -29,19 +29,19 @@ function ChatOnline({onlineUsers,currentId,setCurrentChat}) {
             console.log(err);
           }
     }
+
+    console.log(onlineFriends);
     
     return (
         <div className="chatOnline">
-        {onlineUsers.map((o)=>{
-            <div className="chatOnlineFriend" onClick={()=>{handleClick(o)}}>
+        {onlineFriends.map((o)=>{
+            return (<div className="chatOnlineFriend" onClick={()=>{handleClick(o)}}>
                 <div className="chatOnlineImgContainer">
-                    <img className="chatOnlineImg" src={o.profilePicture ? o.profilePicture: `https://ui-avatars.com/api/?name=${o.username}`} alt=""/>
-                    <div className="chatOnlineBadge">
-
-                    </div>
+                    <img className="chatOnlineImg" src={o?.profilePicture ? o?.profilePicture: `https://ui-avatars.com/api/?name=${o?.username}`} alt=""/>
+                    <div className="chatOnlineBadge"></div>
                 </div>
-                <span className="chatOnlineName">{o.username} </span>
-            </div>   
+                <span className="chatOnlineName">{o?.username}</span>
+            </div>  ); 
         })}
         </div>
     )
