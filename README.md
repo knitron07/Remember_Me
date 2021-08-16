@@ -39,6 +39,6 @@ Socket Server
 
   
 ## Screenshots
-<img src="/screenshots/Screenshots1.png">
+<img src="/screenshots/Screenshot1.png">
 
   
