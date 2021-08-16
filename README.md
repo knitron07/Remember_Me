@@ -22,17 +22,23 @@ Backend
   npm i
   nodemon index.js
 ```
+
+Socket Server
+```bash
+  cd <File_location>/RememberMe/socket
+  npm i
+  nodemon index.js
+```
 ## Features
 
 - post your photos,memories,thoughts etc.
-- chat with your friends
+- chat with your friends.
 - you can see other users profile.
 - You can follow and unfollow ,like or dilike
 - many more
 
   
 ## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+<img src="/screenshots/Screenshots1.png">
 
   

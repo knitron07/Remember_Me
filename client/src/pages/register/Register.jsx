@@ -11,8 +11,7 @@ export default function Register() {
   const history = useHistory();
   const handleClick= async(e)=>{
   e.preventDefault();
-  console.log(passwordAgain.current.value);
-  console.log(password.current.value);
+
 
   if(passwordAgain.current.value !== password.current.value){
     passwordAgain.current.setCustomValidity("password don't match")
