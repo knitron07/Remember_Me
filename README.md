@@ -13,7 +13,7 @@
 - Chat with friends
 - More than two users are able to connect
 - You can see other users profile
-- Like/Dilike posts
+- Like/Dislike posts
 - Store chats
 - Username avatar as well as custom avatar
 - Profile details on clicking users profile
